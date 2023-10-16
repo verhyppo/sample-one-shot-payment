@@ -6,7 +6,6 @@ export async function GET({ url }) {
   return getPayPageData(url.origin, amount)
     .then((json) => new Response(JSON.stringify(json)))
     .catch((e) => {
-      console.log(e);
       throw error(e.status, JSON.stringify(e));
     });
 }

@@ -33,8 +33,7 @@ import { cart } from '$lib/store/cartStore.js';
 
 
 function build() {
-    //store the order
-    throw goto('build/paypage')
+    throw goto(`build/paypage?amount=${$cart.total}`)
 }
 
 async function pay() {

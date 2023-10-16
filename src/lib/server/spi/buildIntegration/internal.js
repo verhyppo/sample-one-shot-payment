@@ -1,6 +1,6 @@
 import { error } from "@sveltejs/kit";
 import makeid from "$lib/server/utils/makeANid";
-import {apikey} from "$lib/server/config.server"
+import { apikey } from "$lib/server/config.server";
 
 const body = (origin, amount) => {
   return {
@@ -29,7 +29,7 @@ const body = (origin, amount) => {
   };
 };
 
-export const getPayPageData = async function (origin, amount) {
+export const getPayPageData = async (origin, amount) => {
   return fetch(
     "https://stg-ta.nexigroup.com/api/phoenix-0.0/psp/api/v1/orders/build",
     {
@@ -40,17 +40,40 @@ export const getPayPageData = async function (origin, amount) {
       },
       body: JSON.stringify(body(origin, amount)),
       method: "POST",
-    }
+    },
   )
     .then((response) => {
       if (response.ok) {
         return response.json();
-      }
-      else {
-        throw { status: response.status, message: "An error occurred while invoking backend service" }
+      } else {
+        throw {
+          status: response.status,
+          message: "An error occurred while invoking backend service",
+        };
       }
     })
     .then((json) => {
       return json;
-    })
+    });
+};
+
+export const pay = (body) => {
+  console.log(body);
+  return fetch(
+    "https://stg-ta.nexigroup.com/api/phoenix-0.0/psp/api/v1/build/finalize_payment",
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/json; charset=UTF-8",
+        "correlation-id": "ca732701-f161-482b-b815-8f70f8ee7b9e",
+        "x-api-key": apikey,
+      },
+      body: JSON.stringify(body),
+    },
+  )
+    .then((response) => response.json())
+    .then((json) => {
+      console.log(json);
+      return json;
+    });
 };

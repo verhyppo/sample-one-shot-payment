@@ -1,13 +1,12 @@
-
 import makeid from "$lib/server/utils/makeANid";
-import {apikey} from "$lib/server/config.server"
+import { apikey } from "$lib/server/config.server";
 
 const expirationDate = () => {
-  const date = new Date
+  const date = new Date();
   date.setMonth(date.getMonth() + 2);
-  console.log("Date", date)
+  console.log("Date", date);
   return date;
-}
+};
 
 const body = (origin, amount) => {
   return {
@@ -29,7 +28,7 @@ const body = (origin, amount) => {
       notificationUrl:
         "https://xpay.nexigroup.com/phoenix-0.0/hostedfields-demo-v1/result_hpp.html",
     },
-    expirationDate: expirationDate().toISOString()
+    expirationDate: expirationDate().toISOString(),
   };
 };
 
@@ -44,21 +43,19 @@ export const createPaymentLink = async function (body) {
       },
       body: JSON.stringify(body),
       method: "POST",
-    }
+    },
   )
     .then((response) => {
       if (response.ok) {
         return response.json();
-      }
-      else {
-        return response.json()
+      } else {
+        return response.json();
       }
     })
     .then((json) => {
       return json;
-    })
+    });
 };
-
 
 function instance() {
   return {

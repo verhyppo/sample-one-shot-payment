@@ -1,5 +1,5 @@
 import makeid from "$lib/server/utils/makeANid";
-import {apikey} from "$lib/server/config.server"
+import { apikey } from "$lib/server/config.server";
 const body = (origin, amount) => {
   return {
     version: "1",
@@ -36,21 +36,19 @@ export const createPaymentLink = async function (body) {
       },
       body: JSON.stringify(body),
       method: "POST",
-    }
+    },
   )
     .then((response) => {
       if (response.ok) {
         return response.json();
-      }
-      else {
-        return response.json()
+      } else {
+        return response.json();
       }
     })
     .then((json) => {
       return json;
-    })
+    });
 };
-
 
 function instance() {
   return {

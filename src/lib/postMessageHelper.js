@@ -5,14 +5,13 @@ import { goto } from "$app/navigation";
 export default (evt) => {
   console.log("Event", evt);
   if (evt.origin.indexOf(iframePostMessageUrl) === 0) {
-    
     let state;
     if ("state" in evt.data) {
-        state = evt.data.state;
+      state = evt.data.state;
     } else {
-        state = evt.data.data.state;
+      state = evt.data.data.state;
     }
-    
+
     if (state) {
       //handle all events
       switch (state) {

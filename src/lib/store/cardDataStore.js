@@ -3,6 +3,7 @@ import { writable } from "svelte/store";
 const initialState = {
   fields: [],
   paymentStatus: "NONE",
+  sessionId: null,
 };
 
 const init = () => {
@@ -13,6 +14,11 @@ const init = () => {
     setFields: (fields) =>
       update((state) => {
         state.fields = fields;
+        return state;
+      }),
+    setSessionId: (sessionId) =>
+      update((state) => {
+        state.sessionId = sessionId;
         return state;
       }),
     setFieldErrorStatus: (id) =>
@@ -26,7 +32,7 @@ const init = () => {
       }),
     setReadyForPayment: () => {
       update((state) => {
-        console.log("Received event! ready to shoot")
+        console.log("Received event! ready to shoot");
         state.paymentStatus = "READY_FOR_PAY";
         return state;
       });

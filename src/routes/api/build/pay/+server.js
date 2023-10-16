@@ -1,11 +1,13 @@
 import { error } from "@sveltejs/kit";
-import {getPayPageData} from '$lib/server/spi/buildIntegration/internal'
+import { pay } from "$lib/server/spi/buildIntegration/internal";
 
-export async function GET({ url }) {
-    let amount = url.searchParams.get("amount");
-    return getPayPageData(amount)
-      .then((json) => new Response(JSON.stringify(json)))
-      .catch((e) => {
-        throw error(400, JSON.stringify(e));
-      });
-  }
+export async function POST(event) {
+  const data = await event.request.json();
+
+  return pay(data)
+    .then((json) => new Response(JSON.stringify(json)))
+    .catch((e) => {
+      console.log(e);
+      throw error(e.status, JSON.stringify(e));
+    });
+}

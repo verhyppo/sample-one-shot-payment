@@ -1,8 +1,10 @@
-import { redirect } from '@sveltejs/kit';
+import { redirect } from "@sveltejs/kit";
 
 function instance() {
   return {
-    pay: (origin, amount) => {throw redirect(302, '/build/paypage?amount='+amount)},
+    pay: (origin, amount) => {
+      throw redirect(302, "/build/paypage?amount=" + amount);
+    },
   };
 }
 

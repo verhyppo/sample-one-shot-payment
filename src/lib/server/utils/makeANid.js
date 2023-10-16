@@ -1,4 +1,4 @@
-export default function(length) {
+export default function (length) {
   let result = "";
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
