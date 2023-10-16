@@ -24,11 +24,9 @@
       }
     );
 
-    console.log(res);
     const json = await res.json();
     const result = JSON.stringify(json);
     let access_token = result.access_token;
-    console.log(access_token);
   }
   doPost();
 </script>

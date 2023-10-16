@@ -8,3 +8,9 @@ body, html {
 main {
   padding: 0;   
 }
+iframe {
+    overflow: auto;
+    border: none;
+    margin: 0;
+    padding: 0
+}
