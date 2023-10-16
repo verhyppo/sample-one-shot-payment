@@ -2,9 +2,11 @@
   import { store } from "$lib/store/cardDataStore";
   import LayoutGrid, { Cell } from "@smui/layout-grid";
   import Button from "@smui/button";
+  import {onDestroy} from 'svelte';
+  import { goto } from "$app/navigation";
 
   const pay = async () => {
-    json = await fetch("/api/build/pay", {
+    const json = await fetch("/api/build/pay", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -21,6 +23,9 @@
       throw goto(json.url);
     }
   };
+  onDestroy(() => {
+		store.clear()
+	});
   const dismiss = () => {};
 </script>
 

@@ -7,10 +7,10 @@ const body = (origin, amount) => {
     merchantUrl: origin,
     version: "1",
     order: {
-      orderId: makeid(18),
+      orderId: `codemotion${makeid(8)}`,
       amount: amount * 100,
       currency: "EUR",
-      customerId: "codemotion" + makeid(5),
+      customerId: `codemotion${makeid(5)}`,
     },
     paymentSession: {
       paymentService: "",

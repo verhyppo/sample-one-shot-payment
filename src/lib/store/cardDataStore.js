@@ -45,7 +45,8 @@ const init = () => {
     clear: () =>
       set({
         fields: [],
-        total: 0,
+        paymentStatus: "NONE",
+        sessionId: null,
       }),
   };
 };
