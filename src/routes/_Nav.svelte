@@ -44,7 +44,7 @@
   <Row>
     <Section>
       <IconButton href="/" class="material-icons">home</IconButton>
-      <Title>Buy a wish</Title>
+      <Title>Piccol Marketplace</Title>
     </Section>
     <Section align="end" toolbar>
       <IconButton href="/cart" class="material-icons">shopping_cart</IconButton>

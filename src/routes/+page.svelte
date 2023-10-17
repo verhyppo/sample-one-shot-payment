@@ -84,7 +84,7 @@
                 </Button>
                 <Button
                   on:click={() =>
-                    cart.removeItem(product)}>
+                    cart.removeItem(product.id)}>
                   <Label>Remove</Label>
                 </Button>
               </ActionButtons>
