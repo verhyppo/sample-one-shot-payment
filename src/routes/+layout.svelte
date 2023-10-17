@@ -1,13 +1,13 @@
 <script>
-  import Nav from "$lib/components/Nav.svelte";
+  import "../app.scss";
+  import Nav from "./_Nav.svelte";
+  import ErrorSnackbar from "./_ErrorSnackbar.svelte"
 </script>
 
-<div class="flexy">
-  <div class="top-app-bar-container flexor">
-    <Nav />
-    <slot />
-  </div>
-</div>
+
+    <ErrorSnackbar></ErrorSnackbar>
+    <Nav></Nav>
+    <slot></slot>
 
 <style>
   .top-app-bar-container {

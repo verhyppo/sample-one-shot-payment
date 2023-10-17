@@ -1,19 +1,19 @@
 
 <div class="card-container">
     <Card>
-        <Content>Pay your order as you prefer</Content>
+        <Content>Pay your order of € {$cart.total.toFixed(2)} as you prefer</Content>
         <Actions>
-        <Button on:click={() => $cart.clear} >
+        <Button on:click={() => cart.clear()} >
             <Label>Clear</Label>
         </Button>
         <Button on:click={() => pay()} disabled='{$cart.total <=0}'>
-            <Label>PAY WITH HOSTED PAYMENT PAGE {$cart.total.toFixed(2)}</Label>
+            <Label>PAY WITH HOSTED PAYMENT PAGE</Label>
         </Button>
         <Button on:click={() => build()} disabled='{$cart.total <=0}'>
-            <Label>PAY WITH BUILD {$cart.total.toFixed(2)}</Label>
+            <Label>PAY WITH BUILD</Label>
         </Button>
         <Button on:click={() => pbl()} disabled='{$cart.total <=0}'>
-            <Label>PAYBYLINK {$cart.total.toFixed(2)}</Label>
+            <Label>PAYBYLINK</Label>
         </Button>
         </Actions>
     </Card>
@@ -29,7 +29,7 @@ import Card, {
 import Button, { Label } from '@smui/button';
 import {goto} from '$app/navigation'
 
-import { cart } from '$lib/store/cartStore.js';
+import { cart } from '$lib/store/cartStore';
 
 
 function build() {

@@ -11,12 +11,14 @@
   onMount(() => window.addEventListener("message", postMessageHelper));
 </script>
 
-<h1>pay page</h1>
 
-<LayoutGrid>
+<div class="payment-form" id="payment-methods">
+  <h1 class="payment-title">pay page</h1>
+  <div class="payment-content">
   {#each data.fields as { id, type, src }, i}
-    <Cell span={3}>
+    <div class="payment-field" {id}>
       <iframe {src} title={type}></iframe>
-    </Cell>
+    </div>
   {/each}
-</LayoutGrid>
+  </div>
+</div>

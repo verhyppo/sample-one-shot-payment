@@ -2,11 +2,11 @@
 <div class="accordion-container">
     <div class="accordion-content">
     <Accordion>
-        {#each $cart.items as { name, description }, i}
+        {#each $cart.items as { name, description, quantity}, i}
         <Panel>
             <Header>{name}</Header>
             <Content>
-            {description}
+            quantity: {quantity}
             </Content>
         </Panel>
         {/each}
@@ -22,7 +22,7 @@
     import Banner, { Label } from '@smui/banner';
     import Button from '@smui/button';
     import { redirect } from '@sveltejs/kit';
-    import PayInCart from '$lib/components/PayInCart.svelte'
+    import PayInCart from './_PayInCart.svelte'
 
   </script>
   
@@ -30,6 +30,7 @@
     .accordion-container {
         display: flex;
         justify-content: center;
+        margin-top: 30px;
     }
     .accordion-content {
         max-width: 640px;

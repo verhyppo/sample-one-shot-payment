@@ -4,8 +4,18 @@ import mkcert from "vite-plugin-mkcert";
 
 export default defineConfig({
   plugins: [sveltekit(), mkcert()],
+
   server: {
     https: true,
   },
+
   proxy: {},
+
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: '@use "src/variables.scss" as *;',
+      },
+    },
+  },
 });

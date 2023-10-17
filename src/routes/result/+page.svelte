@@ -1,9 +1,14 @@
-<h1>result</h1>
-{data.paymentid}
-<script>
-    import {onMount} from 'svelte';
-  /** @type {import('./$types').PageData} */
-  export let data;
+<div class="card-container">
+  <Card padded>Your Payment has been confirmed</Card>
+</div>
 
-  onMount(() => {})
+<script>
+    import Card, { Content } from '@smui/card';
 </script>
+<style>
+  .card-container {
+      margin: 0 auto;
+      max-width: 480px;
+      margin-top: 30px;
+  }
+</style>
