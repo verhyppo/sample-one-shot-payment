@@ -3,10 +3,7 @@ import { error } from "@sveltejs/kit";
 
 export async function GET({ url }) {
   let orderId = url.searchParams.get("orderId");
-  return orderService()
-    .serverOrder(orderId)
-    .then((json) => new Response(JSON.stringify(json)))
-    .catch((e) => {
-      throw error(400, JSON.stringify(e));
-    });
+  const serverOrder = await orderService().serverOrder(orderId);
+  const [dbOrder] = await orderService().dbOrder(orderId) || [];
+  return new Response(JSON.stringify({server: serverOrder, db: dbOrder}));
 }
