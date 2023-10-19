@@ -28,8 +28,7 @@ const body = (origin, amount) => {
       },
       exemptions: "NO_PREFERENCE",
       language: "ITA",
-      notificationUrl:
-        "https://xpay.nexigroup.com/phoenix-0.0/hostedfields-demo-v1/result_hpp.html",
+      notificationUrl: `${origin}/api/ack?orderId=${orderid}`
     },
     expirationDate: expirationDate().toISOString(),
   };

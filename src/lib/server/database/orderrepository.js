@@ -26,3 +26,11 @@ export const upsertOrder = async (orderId, response, ack) => {
     }));
   console.log(upsertData, upsertError);
 }
+export const getOrder = async (orderId) => {
+  const { data, error } = await supabase
+    .from("orders")
+    .select()
+    .eq("order_id", orderId);
+  
+  return data; 
+} 
