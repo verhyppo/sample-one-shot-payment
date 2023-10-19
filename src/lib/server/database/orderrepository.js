@@ -11,7 +11,7 @@ export async function saveOrder(correlationId, order) {
 export async function upsertOrder(orderId, response, ack) {
   const { data, error } = await supabase
     .from("orders")
-    .upsert({ orderId: orderId, response: response, ack: true })
+    .upsert({ order_id: orderId, response: response, ack: true })
     .eq("order_id", orderId);
   console.log(data, error);
 }
