@@ -12,6 +12,6 @@ export async function upsertOrder(orderId, response, ack) {
   const { data, error } = await supabase
     .from("orders")
     .upsert({ orderId: orderId, response: response, ack: true })
-    .eq("orderId", orderId);
+    .eq("order_id", orderId);
   console.log(data, error);
 }
