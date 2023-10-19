@@ -9,9 +9,13 @@ export async function saveOrder(correlationId, order) {
   console.log("data", data, error);
 }
 export async function upsertOrder(orderId, response, ack) {
+  const { select, error } = await supabase
+  .from('countries')
+  .select()
+  .eq("order_id", orderId);
+
   const { data, error } = await supabase
     .from("orders")
-    .upsert({ order_id: orderId, response: response, ack: true })
-    .eq("order_id", orderId);
+    .upsert({ id: select.[0].id, order_id: orderId, response: response, ack: true })
   console.log(data, error);
 }
