@@ -1,6 +1,8 @@
 <script>
   import { clientID, challenge, redirect_uri } from "$lib/client.config";
   import { onMount } from "svelte";
+  import Badge from "@smui-extra/badge";
+  import { Icon } from "@smui/common";
   import TopAppBar, {
     Row,
     Section,
@@ -12,7 +14,7 @@
   let topAppBar;
 
   $: modeLabel = `switch to ${darkTheme ? "light" : "dark"} mode`;
-  let darkTheme=false;
+  let darkTheme = false;
   // This icon represents the mode to which the user can switch.
   $: modeIcon = darkTheme ? "light_mode" : "dark_mode";
 
@@ -24,14 +26,8 @@
 <svelte:head>
   <link rel="stylesheet" href="/global.css" />
   {#if darkTheme === undefined}
-    <link
-      rel="stylesheet"
-      href="/smui.css"
-    />
-    <link
-      rel="stylesheet"
-      href="/smui-dark.css"
-    />
+    <link rel="stylesheet" href="/smui.css" />
+    <link rel="stylesheet" href="/smui-dark.css" />
   {:else if darkTheme}
     <link rel="stylesheet" href="/smui.css" media="print" />
     <link rel="stylesheet" href="/smui-dark.css" media="screen" />
@@ -47,7 +43,10 @@
       <Title>Piccol Marketplace</Title>
     </Section>
     <Section align="end" toolbar>
-      <IconButton href="/cart" class="material-icons">shopping_cart</IconButton>
+      <IconButton href="/cart" style="position: relative;">
+        <Icon class="material-icons">shopping_cart</Icon>
+      </IconButton>
+
       <IconButton
         aria-label={modeLabel}
         class="material-icons"

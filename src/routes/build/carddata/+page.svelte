@@ -28,7 +28,9 @@
       throw goto(json.url);
     }
   };
-  const dismiss = () => {};
+  const dismiss = () => {
+    
+  };
 </script>
 
 <form>

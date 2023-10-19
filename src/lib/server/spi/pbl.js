@@ -1,5 +1,7 @@
 import makeid from "$lib/server/utils/makeANid";
 import { apikey } from "$lib/server/config.server";
+import {saveOrder} from "$lib/server/database/orderrepository"
+import crypto from "crypto";
 
 const expirationDate = () => {
   const date = new Date();
@@ -9,10 +11,11 @@ const expirationDate = () => {
 };
 
 const body = (origin, amount) => {
+  const orderid= makeid(18)
   return {
     version: "1",
     order: {
-      orderId: makeid(18),
+      orderId: orderid,
       amount: amount * 100,
       currency: "EUR",
       customerId: "codemotion" + makeid(5),
@@ -33,18 +36,19 @@ const body = (origin, amount) => {
 };
 
 export const createPaymentLink = async function (body) {
-  return fetch(
+  const uuid = crypto.randomUUID();
+  return saveOrder(uuid, body).then(() => fetch(
     "https://stg-ta.nexigroup.com/api/phoenix-0.0/psp/api/v1/orders/paybylink",
     {
       headers: {
         "x-api-key": apikey,
-        "Correlation-Id": "ca732701-f161-482b-b815-8f70f8ee7b9e",
+        "Correlation-Id": uuid,
         "Content-type": "application/json",
       },
       body: JSON.stringify(body),
       method: "POST",
     },
-  )
+  ))
     .then((response) => {
       if (response.ok) {
         return response.json();

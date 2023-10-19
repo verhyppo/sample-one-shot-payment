@@ -1,6 +1,7 @@
 import { error } from "@sveltejs/kit";
 import makeid from "$lib/server/utils/makeANid";
 import { apikey } from "$lib/server/config.server";
+import { saveOrder } from "$lib/server/database/orderrepository";
 
 const body = (origin, amount) => {
   return {
@@ -35,7 +36,7 @@ export const getPayPageData = async (origin, amount) => {
     {
       headers: {
         "x-api-key": apikey,
-        "Correlation-Id": "ca732701-f161-482b-b815-8f70f8ee7b9e",
+        "Correlation-Id": "2a58383d-fb6f-4eda-a13b-aee1199bd8fe",
         "Content-type": "application/json",
       },
       body: JSON.stringify(body(origin, amount)),
@@ -58,19 +59,22 @@ export const getPayPageData = async (origin, amount) => {
 };
 
 export const pay = (body) => {
-  console.log(body);
-  return fetch(
-    "https://stg-ta.nexigroup.com/api/phoenix-0.0/psp/api/v1/build/finalize_payment",
-    {
-      method: "POST",
-      headers: {
-        "content-type": "application/json; charset=UTF-8",
-        "correlation-id": "ca732701-f161-482b-b815-8f70f8ee7b9e",
-        "x-api-key": apikey,
-      },
-      body: JSON.stringify(body),
-    },
-  )
+  const uuid = crypto.randomUUID();
+  return saveOrder(uuid, body)
+    .then(() =>
+      fetch(
+        "https://stg-ta.nexigroup.com/api/phoenix-0.0/psp/api/v1/build/finalize_payment",
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json; charset=UTF-8",
+            "correlation-id": uuid,
+            "x-api-key": apikey,
+          },
+          body: JSON.stringify(body),
+        },
+      ),
+    )
     .then((response) => response.json())
     .then((json) => {
       console.log(json);

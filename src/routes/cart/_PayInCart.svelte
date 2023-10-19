@@ -10,14 +10,15 @@
             <Label>PAY WITH HOSTED PAYMENT PAGE</Label>
         </Button>
         <Button on:click={() => build()} disabled='{$cart.total <=0}'>
-            <Label>PAY WITH BUILD</Label>
+            <Label>PAY WITH BUILD API</Label>
         </Button>
         <Button on:click={() => pbl()} disabled='{$cart.total <=0}'>
-            <Label>PAYBYLINK</Label>
+            <Label>ASK SOMEONE TO PAY FOR YOU(PAYBYLINK)</Label>
         </Button>
         </Actions>
     </Card>
 </div>
+<PayForMe dialogText={pblurl} open={openDialog}/>
 <script>
 import Card, {
     Content,
@@ -26,12 +27,14 @@ import Card, {
     ActionButtons,
     ActionIcons,
 } from '@smui/card';
+import PayForMe from './_PayForMe.svelte'
 import Button, { Label } from '@smui/button';
 import {goto} from '$app/navigation'
 
 import { cart } from '$lib/store/cartStore';
 
-
+let pblurl;
+let openDialog=false;
 function build() {
     throw goto(`build/paypage?amount=${$cart.total}`)
 }
@@ -46,6 +49,7 @@ async function pbl() {
   let url = await fetch(`/api/pbl?amount=${$cart.total}`)
   .then((data) => data.json())
   .then((json) => json.paymentLink.link);
-  throw goto(url)
+  pblurl=url;
+  openDialog=true;
 }
 </script>

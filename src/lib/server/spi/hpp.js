@@ -1,10 +1,12 @@
 import makeid from "$lib/server/utils/makeANid";
 import { apikey } from "$lib/server/config.server";
+import { saveOrder } from "../database/orderrepository";
+
 const body = (origin, amount) => {
+  const orderid= makeid(18);
   return {
-    version: "1",
     order: {
-      orderId: makeid(18),
+      orderId: orderid,
       amount: amount * 100,
       currency: "EUR",
       customerId: "codemotion" + makeid(5),
@@ -17,27 +19,28 @@ const body = (origin, amount) => {
       },
       exemptions: "NO_PREFERENCE",
       language: "ITA",
-      resultUrl: `${origin}/result`,
-      cancelUrl: `${origin}/cancel`,
+      resultUrl: `${origin}/result?orderId=${orderid}`,
+      cancelUrl: `${origin}/cancel?orderId=${orderid}`,
       notificationUrl:
-        "https://xpay.nexigroup.com/phoenix-0.0/hostedfields-demo-v1/result_hpp.html",
+        `${origin}/api/ack?orderId=${orderid}`,
     },
   };
 };
 
 export const createPaymentLink = async function (body) {
-  return fetch(
+  const uuid = crypto.randomUUID();
+  return saveOrder(uuid, body).then(() =>fetch(
     "https://stg-ta.nexigroup.com/api/phoenix-0.0/psp/api/v1/orders/hpp",
     {
       headers: {
         "x-api-key": apikey,
-        "Correlation-Id": "ca732701-f161-482b-b815-8f70f8ee7b9e",
+        "Correlation-Id": "2a58383d-fb6f-4eda-a13b-aee1199bd8fe",
         "Content-type": "application/json",
       },
       body: JSON.stringify(body),
       method: "POST",
     },
-  )
+  ))
     .then((response) => {
       if (response.ok) {
         return response.json();
