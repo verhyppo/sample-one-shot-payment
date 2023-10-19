@@ -1,8 +1,8 @@
-<script context="module" lang="ts">
+<script context="module">
   let counter = 0;
 </script>
 
-<script lang="ts">
+<script>
   import Kitchen from "@smui/snackbar/kitchen";
   import Button, { Label } from "@smui/button";
   import pushToKitchen, { container } from "$lib/store/errorStore";
