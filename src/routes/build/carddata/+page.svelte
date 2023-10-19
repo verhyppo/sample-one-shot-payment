@@ -29,7 +29,7 @@
     }
   };
   const dismiss = () => {
-    
+
   };
 </script>
 
@@ -44,7 +44,7 @@
       {/each}
 
       <div class="payment-buttons">
-        <Button on:click={() => pay()} variant="raised">Pay</Button>
+        <Button on:click={() => pay()} variant="raised" disabled={$store.paymentStatus!=="READY_FOR_PAY"}>Pay</Button>
         <Button on:click={() => dismiss()} variant="raised" color="secondary"
           >Dismiss</Button
         >

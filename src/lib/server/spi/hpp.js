@@ -1,9 +1,10 @@
 import makeid from "$lib/server/utils/makeANid";
 import { apikey } from "$lib/server/config.server";
 import { saveOrder } from "../database/orderrepository";
+import crypto from "crypto";
 
 const body = (origin, amount) => {
-  const orderid= makeid(18);
+  const orderid = makeid(18);
   return {
     order: {
       orderId: orderid,
@@ -21,26 +22,28 @@ const body = (origin, amount) => {
       language: "ITA",
       resultUrl: `${origin}/result?orderId=${orderid}`,
       cancelUrl: `${origin}/cancel?orderId=${orderid}`,
-      notificationUrl:
-        `${origin}/api/ack?orderId=${orderid}`,
+      notificationUrl: `${origin}/api/ack?orderId=${orderid}`,
     },
   };
 };
 
 export const createPaymentLink = async function (body) {
   const uuid = crypto.randomUUID();
-  return saveOrder(uuid, body).then(() =>fetch(
-    "https://stg-ta.nexigroup.com/api/phoenix-0.0/psp/api/v1/orders/hpp",
-    {
-      headers: {
-        "x-api-key": apikey,
-        "Correlation-Id": "2a58383d-fb6f-4eda-a13b-aee1199bd8fe",
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(body),
-      method: "POST",
-    },
-  ))
+  return saveOrder(uuid, body)
+    .then(() =>
+      fetch(
+        "https://stg-ta.nexigroup.com/api/phoenix-0.0/psp/api/v1/orders/hpp",
+        {
+          headers: {
+            "x-api-key": apikey,
+            "Correlation-Id": uuid,
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(body),
+          method: "POST",
+        },
+      ),
+    )
     .then((response) => {
       if (response.ok) {
         return response.json();
