@@ -12,11 +12,10 @@
     })
       .then((data) => data.json())
       .then((json) => {
-        console.log(json);
         return json;
       });
     console.log(json);
-    if (json.state === "REDIRECTED_TO_EXTERNAL_DOMAIN") {
+    if (json.state == "REDIRECTED_TO_EXTERNAL_DOMAIN") {
       throw goto(json.url);
     }
   };
