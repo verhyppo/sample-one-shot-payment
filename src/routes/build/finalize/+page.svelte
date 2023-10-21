@@ -1,14 +1,8 @@
-<div class="payment-form" id="payment-methods">
-  <h1 class="payment-title">Finalize your payment</h1>
-  <div class="payment-content"></div>
-  <Button on:click={() => pay()} variant="raised" color="secondary">Finalize payment</Button>
-</div>
-</div>
 <script>
   import { store } from "$lib/store/cardDataStore";
   import Button from "@smui/button";
 
-    const pay = async () => {
+  const pay = async () => {
     const json = await fetch("/api/build/pay", {
       method: "POST",
       headers: {
@@ -27,3 +21,12 @@
     }
   };
 </script>
+
+<div class="payment-form" id="payment-methods">
+  <h1 class="payment-title">Finalize your payment</h1>
+  <div class="payment-content">
+    <Button on:click={() => pay()} variant="raised" color="secondary"
+      >Finalize payment</Button
+    >
+  </div>
+</div>
