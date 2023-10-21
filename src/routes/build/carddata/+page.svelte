@@ -28,9 +28,7 @@
       throw goto(json.url);
     }
   };
-  const dismiss = () => {
-
-  };
+  const dismiss = () => {};
 </script>
 
 <form>
@@ -44,7 +42,11 @@
       {/each}
 
       <div class="payment-buttons">
-        <Button on:click={() => pay()} variant="raised" disabled={$store.paymentStatus!=="READY_FOR_PAY"}>Pay</Button>
+        <Button
+          on:click={() => pay()}
+          variant="raised"
+          disabled={$store.paymentStatus !== "READY_FOR_PAY"}>Pay</Button
+        >
         <Button on:click={() => dismiss()} variant="raised" color="secondary"
           >Dismiss</Button
         >

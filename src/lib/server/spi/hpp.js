@@ -2,6 +2,7 @@ import makeid from "$lib/server/utils/makeANid";
 import { apikey } from "$lib/server/config.server";
 import { saveOrder } from "../database/orderrepository";
 import crypto from "crypto";
+import { error } from "@sveltejs/kit";
 
 const body = (origin, amount) => {
   const orderid = makeid(18);
@@ -38,6 +39,7 @@ export const createPaymentLink = async function (body) {
             "x-api-key": apikey,
             "Correlation-Id": uuid,
             "Content-type": "application/json",
+            Accept: "application/json",
           },
           body: JSON.stringify(body),
           method: "POST",
@@ -48,11 +50,10 @@ export const createPaymentLink = async function (body) {
       if (response.ok) {
         return response.json();
       } else {
-        return response.json();
+        throw error(response.status, {
+          message: "An error occurred while invoking backend service",
+        });
       }
-    })
-    .then((json) => {
-      return json;
     });
 };
 

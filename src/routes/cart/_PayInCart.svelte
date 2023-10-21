@@ -33,7 +33,7 @@ import { cart } from '$lib/store/cartStore';
 let pblurl;
 let openDialog=false;
 function build() {
-    throw goto(`build/paypage?amount=${$cart.total}`)
+    throw goto(`build/init?amount=${$cart.total}`)
 }
 
 async function pay() {

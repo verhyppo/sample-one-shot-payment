@@ -1,7 +1,8 @@
 import makeid from "$lib/server/utils/makeANid";
 import { apikey } from "$lib/server/config.server";
-import {saveOrder} from "$lib/server/database/orderrepository"
+import { saveOrder } from "$lib/server/database/orderrepository";
 import crypto from "crypto";
+import { error } from "@sveltejs/kit";
 
 const expirationDate = () => {
   const date = new Date();
@@ -11,7 +12,7 @@ const expirationDate = () => {
 };
 
 const body = (origin, amount) => {
-  const orderid= makeid(18)
+  const orderid = makeid(18);
   return {
     version: "1",
     order: {
@@ -28,7 +29,7 @@ const body = (origin, amount) => {
       },
       exemptions: "NO_PREFERENCE",
       language: "ITA",
-      notificationUrl: `${origin}/api/ack?orderId=${orderid}`
+      notificationUrl: `${origin}/api/ack?orderId=${orderid}`,
     },
     expirationDate: expirationDate().toISOString(),
   };
@@ -36,27 +37,29 @@ const body = (origin, amount) => {
 
 export const createPaymentLink = async function (body) {
   const uuid = crypto.randomUUID();
-  return saveOrder(uuid, body).then(() => fetch(
-    "https://stg-ta.nexigroup.com/api/phoenix-0.0/psp/api/v1/orders/paybylink",
-    {
-      headers: {
-        "x-api-key": apikey,
-        "Correlation-Id": uuid,
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(body),
-      method: "POST",
-    },
-  ))
+  return saveOrder(uuid, body)
+    .then(() =>
+      fetch(
+        "https://stg-ta.nexigroup.com/api/phoenix-0.0/psp/api/v1/orders/paybylink",
+        {
+          headers: {
+            "x-api-key": apikey,
+            "Correlation-Id": uuid,
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(body),
+          method: "POST",
+        },
+      ),
+    )
     .then((response) => {
       if (response.ok) {
         return response.json();
       } else {
-        return response.json();
+        throw error(response.status, {
+          message: "An error occurred while invoking backend service",
+        });
       }
-    })
-    .then((json) => {
-      return json;
     });
 };
 
