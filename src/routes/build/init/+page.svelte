@@ -11,8 +11,8 @@
 
   onMount(() => window.addEventListener("message", postMessageHelper));
 
-  store.paymentStatus.subscribe(value => {
-      if (value == "READY_FOR_PAY") {
+  store.subscribe(value => {
+      if (value.paymentStatus == "READY_FOR_PAY") {
         throw goto("build/finalize");
       }
     }
