@@ -6,7 +6,7 @@
 
   /** @type {import('./$types').PageData} */
   export let data;
-  store.storeOrderId(data.orderId);
+  store.setOrderId(data.orderId);
   store.setSessionId(data.sessionId);
 
   /**
