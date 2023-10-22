@@ -18,13 +18,12 @@
         console.log("SONO STATA CHIAMATA!", $store.paymentStatus);
         if ($store.paymentStatus === "READY_FOR_PAY") {
             console.log("SONO STATA CHIAMATA! DENTRO L'IF", $store.paymentStatus);
-            //throw goto(`/build/${$store.orderId}/finalize`);
+            throw goto(`/build/${$store.orderId}/finalize`);
         }
     }
 
-    $: $store, redirectOnStoreChange;
     $: ({paymentStatus} = $store);
-    $: paymentStatus, console.log("son stato chiamato");
+    $: paymentStatus, redirectOnStoreChange();
 </script>
 
 <div class="payment-form" id="payment-methods">
