@@ -17,7 +17,7 @@
    **/
   store.subscribe((value) => {
     if (value.paymentStatus == "READY_FOR_PAY") {
-      throw goto("/build/finalize");
+      throw goto(`/build/${store.orderId}/finalize`);
     }
   });
 </script>

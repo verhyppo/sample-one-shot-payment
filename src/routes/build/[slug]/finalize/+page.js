@@ -4,7 +4,7 @@ import { store } from "$lib/store/buildFlowStore";
 /** @type {import('./$types').PageLoad} */
 
 export async function load({ params, url, fetch }) {
-  const orderId = store.orderId;
+  const orderId = params.slug;
   const json = await fetch(`/api/order/${orderId}`)
     .then((data) => data.json())
     .catch((e) => {
