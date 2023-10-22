@@ -11,22 +11,7 @@
   });
 
   const pay = async () => {
-    const json = await fetch("/api/build/pay", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ sessionId: $store.sessionId }),
-    })
-      .then((data) => data.json())
-      .then((json) => {
-        console.log(json);
-        return json;
-      });
-    console.log(json);
-    if (json.state === "REDIRECTED_TO_EXTERNAL_DOMAIN") {
-      throw goto(json.url);
-    }
+      throw goto('/build/finalize?orderId=');
   };
   const dismiss = () => {};
 </script>

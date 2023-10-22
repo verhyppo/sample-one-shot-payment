@@ -2,21 +2,24 @@
   import { goto } from "$app/navigation";
   import LayoutGrid, { Cell } from "@smui/layout-grid";
   import { onMount } from "svelte";
-  import postMessageHelper from "$lib/postMessageHelper";
   import { store } from "$lib/store/cardDataStore";
 
   /** @type {import('./$types').PageData} */
   export let data;
+  store.storeOrderId(data.orderId);
   store.setSessionId(data.sessionId);
 
-  onMount(() => window.addEventListener("message", postMessageHelper));
-
-  store.subscribe(value => {
-      if (value.paymentStatus == "READY_FOR_PAY") {
-        throw goto("/build/finalize");
-      }
+  /**
+   * During the initial page, when the user selects
+   * alternative payment methods, we receive a message
+   * that allows us to finalize the payment.
+   * In this case we jump to the last one
+   **/
+  store.subscribe((value) => {
+    if (value.paymentStatus == "READY_FOR_PAY") {
+      throw goto("/build/finalize");
     }
-  );
+  });
 </script>
 
 <div class="payment-form" id="payment-methods">

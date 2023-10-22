@@ -4,6 +4,7 @@ const initialState = {
   fields: [],
   paymentStatus: "NONE",
   sessionId: null,
+  orderId: null,
 };
 
 const init = () => {
@@ -19,6 +20,11 @@ const init = () => {
     setSessionId: (sessionId) =>
       update((state) => {
         state.sessionId = sessionId;
+        return state;
+      }),
+    setOrderId: (orderId) =>
+      update((state) => {
+        state.orderId = orderId;
         return state;
       }),
     setFieldErrorStatus: (id) =>
@@ -47,6 +53,7 @@ const init = () => {
         fields: [],
         paymentStatus: "NONE",
         sessionId: null,
+        orderId: null,
       }),
   };
 };
