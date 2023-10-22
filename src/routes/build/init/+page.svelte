@@ -15,11 +15,17 @@
    * that allows us to finalize the payment.
    * In this case we jump to the last one
    **/
-  store.subscribe((value) => {
+  onMount(() => store.subscribe((value) => {
     if (value.paymentStatus == "READY_FOR_PAY") {
       throw goto(`/build/${$store.orderId}/finalize`);
     }
   });
+  /* Remove the binding when this page gets destroyed.
+  * we want tor redirect automatically just here :)
+  */
+  onDestroy(() => store.unsubscribe());
+
+  );
 </script>
 
 <div class="payment-form" id="payment-methods">
