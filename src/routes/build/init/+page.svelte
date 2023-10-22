@@ -6,6 +6,7 @@
 
   /** @type {import('./$types').PageData} */
   export let data;
+  let unsubscribe;
   store.setOrderId(data.orderId);
   store.setSessionId(data.sessionId);
 
@@ -15,8 +16,9 @@
    * that allows us to finalize the payment.
    * In this case we jump to the last one
    **/
+
   onMount(() =>
-    store.subscribe((value) => {
+  unsubscribe = store.subscribe((value) => {
       if (value.paymentStatus == "READY_FOR_PAY") {
         throw goto(`/build/${$store.orderId}/finalize`);
       }
@@ -25,7 +27,7 @@
   /* Remove the binding when this page gets destroyed.
    * we want tor redirect automatically just here :)
    */
-  onDestroy(store);
+  onDestroy(unsubscribe);
 </script>
 
 <div class="payment-form" id="payment-methods">
