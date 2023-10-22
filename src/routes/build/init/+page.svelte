@@ -18,7 +18,7 @@
         console.log("SONO STATA CHIAMATA!", $store.paymentStatus);
         if ($store.paymentStatus === "READY_FOR_PAY") {
             console.log("SONO STATA CHIAMATA! DENTRO L'IF", $store.paymentStatus);
-            throw goto(`/build/${$store.orderId}/finalize`);
+            goto(`/build/${$store.orderId}/finalize`);
         }
     }
 
