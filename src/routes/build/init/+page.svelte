@@ -1,7 +1,7 @@
 <script>
   import { goto } from "$app/navigation";
   import LayoutGrid, { Cell } from "@smui/layout-grid";
-  import { onMount } from "svelte";
+  import { onMount, onDestroy } from "svelte";
   import { store } from "$lib/store/buildFlowStore";
 
   /** @type {import('./$types').PageData} */
