@@ -25,7 +25,7 @@
   /* Remove the binding when this page gets destroyed.
    * we want tor redirect automatically just here :)
    */
-  onDestroy(() => store.unsubscribe());
+  onDestroy(store);
 </script>
 
 <div class="payment-form" id="payment-methods">
