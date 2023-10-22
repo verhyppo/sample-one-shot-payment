@@ -17,6 +17,7 @@
      **/
 
     $: $store, () => {
+        console.log("SONO STATA CHIAMATA!",$store.paymentStatus);
         if ($store.paymentStatus == "READY_FOR_PAY") {
             throw goto(`/build/${$store.orderId}/finalize`);
         }
