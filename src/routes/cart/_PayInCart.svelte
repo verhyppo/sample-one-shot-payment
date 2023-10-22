@@ -3,17 +3,17 @@
     <Card>
         <Content>Pay your order of € {$cart.total.toFixed(2)} as you prefer</Content>
         <Actions>
-        <Button on:click={() => cart.clear()} >
+        <Button on:click={() => cart.clear()} variant="raised" color="secondary">
             <Label>Clear</Label>
         </Button>
-        <Button on:click={() => pay()} disabled='{$cart.total <=0}'>
+        <Button on:click={() => pay()} disabled='{$cart.total <=0}' variant="outlined">
             <Label>PAY WITH HOSTED PAYMENT PAGE</Label>
         </Button>
-        <Button on:click={() => build()} disabled='{$cart.total <=0}'>
+        <Button on:click={() => build()} disabled='{$cart.total <=0}' variant="outlined">
             <Label>PAY WITH BUILD API</Label>
         </Button>
-        <Button on:click={() => pbl()} disabled='{$cart.total <=0}'>
-            <Label>ASK SOMEONE TO PAY FOR YOU(PAYBYLINK)</Label>
+        <Button on:click={() => pbl()} disabled='{$cart.total <=0}' variant="outlined">
+            <Label>ASK SOMEONE TO PAY FOR YOU (PAYBYLINK)</Label>
         </Button>
         </Actions>
     </Card>
@@ -22,10 +22,7 @@
 <script>
 import Card, {
     Content,
-    PrimaryAction,
     Actions,
-    ActionButtons,
-    ActionIcons,
 } from '@smui/card';
 import PayForMe from './_PayForMe.svelte'
 import Button, { Label } from '@smui/button';
@@ -46,10 +43,9 @@ async function pay() {
   throw goto(url)
 }
 async function pbl() {
-  let url = await fetch(`/api/pbl?amount=${$cart.total}`)
+  pblurl = await fetch(`/api/pbl?amount=${$cart.total}`)
   .then((data) => data.json())
   .then((json) => json.paymentLink.link);
-  pblurl=url;
   openDialog=true;
 }
 </script>
