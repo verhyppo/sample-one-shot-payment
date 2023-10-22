@@ -21,8 +21,8 @@ const manageStateChange = async (event) => {
 };
 export default (evt) => {
   console.log("Event", evt);
-  if (evt.origin.indexOf(iframePostMessageUrl) === 0) {
-    let data = evt || "data" in evt.data ? evt.data.data : evt.data;
+  if (evt?.origin?.indexOf(iframePostMessageUrl) === 0) {
+    let data = "data" in evt.data ? evt.data.data : evt.data;
 
     const { event, id, message } = data;
     console.log("logging extracted data", data, event, id, message)
