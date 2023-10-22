@@ -1,38 +1,52 @@
-# create-svelte
+# Sample XPAY Payments
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
-
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+[👀 Look at the demo](https://sample-one-shot-payment.vercel.app/)
 
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Install dependencies with `npm install` (or `pnpm install` or `yarn`), then start a development server (plase read configuration section first):
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+npm run dev -- --https
 ```
 
 ## Building
 
-To create a production version of your app:
-
+To create a production version of this app:
 ```bash
 npm run build
 ```
 
-You can preview the production build with `npm run preview`.
-
+You can preview the production build with 
+```
+npm run preview
+```
+The application is ready to be deployed as a Vercel app. 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+
+## Configuring
+### Server
+You can change your api key by changing the following file
+```
+src/lib/server/config.server.js
+```
+you can change the SUPABASE api key by changing [.env.local](.env.local)
+
+### Creating Database
+The application is ready to use a PG instance on [supabase](https://supabase.com/).
+You can create needed schema by using [order-DDL.sql](database/order-DDL.sql)
+
+## Powered by
+
+[XPAY Developer Documentation](https://developer.nexi.it)
+[SMUI](https://sveltematerialui.com/)
+[SvelteKit](https://kit.svelte.dev/)
+
+## Next Steps
+- Build Flow:
+  - support APM
+- Authorization
+  - add login
+  - proper ACL!!
+  - send customer info to XPAY when creating orders
+  - support 1Click payments
