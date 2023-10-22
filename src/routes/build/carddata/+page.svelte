@@ -1,18 +1,12 @@
 <script>
   import { store } from "$lib/store/buildFlowStore";
-  import LayoutGrid, { Cell } from "@smui/layout-grid";
   import Button from "@smui/button";
   import { onDestroy } from "svelte";
   import { goto } from "$app/navigation";
-  import Card, { Content } from "@smui/card";
 
   onDestroy(() => {
     store.clear();
   });
-
-  const pay = async () => {
-    goto(`/build/${$store.orderId}/finalize`);
-  };
   const dismiss = () => {};
 </script>
 
@@ -28,7 +22,7 @@
 
       <div class="payment-buttons">
         <Button
-          on:click={() => pay()}
+          href="/build/${$store.orderId}/finalize"
           variant="raised"
           disabled={$store.paymentStatus !== "READY_FOR_PAY"}>Pay</Button
         >
