@@ -17,7 +17,7 @@
    * In this case we jump to the last one
    **/
 
-  if ($store.paymentStatus == "READY_FOR_PAY") {
+  $: if ($store.paymentStatus == "READY_FOR_PAY") {
     throw goto(`/build/${$store.orderId}/finalize`);
   }
 </script>
