@@ -1,6 +1,7 @@
 <script>
     import {goto} from "$app/navigation";
     import {store} from "$lib/store/buildFlowStore";
+    import {onMount} from "svelte";
 
     /** @type {import('./$types').PageData} */
     export let data;
@@ -13,14 +14,15 @@
      * that allows us to finalize the payment.
      * In this case we jump to the last one
      **/
-
-    $: $store, () => {
-        console.log("SONO STATA CHIAMATA!",$store.paymentStatus);
+    const redirectOnStoreChange = () => {
+        console.log("SONO STATA CHIAMATA!", $store.paymentStatus);
         if ($store.paymentStatus === "READY_FOR_PAY") {
-            console.log("SONO STATA CHIAMATA! DENTRO L'IF",$store.paymentStatus);
+            console.log("SONO STATA CHIAMATA! DENTRO L'IF", $store.paymentStatus);
             //throw goto(`/build/${$store.orderId}/finalize`);
         }
     }
+
+    $: $store, redirectOnStoreChange;
 </script>
 
 <div class="payment-form" id="payment-methods">
