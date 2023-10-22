@@ -1,7 +1,5 @@
 <script>
     import {goto} from "$app/navigation";
-    import LayoutGrid, {Cell} from "@smui/layout-grid";
-    import {onMount, onDestroy} from "svelte";
     import {store} from "$lib/store/buildFlowStore";
 
     /** @type {import('./$types').PageData} */
@@ -18,8 +16,9 @@
 
     $: $store, () => {
         console.log("SONO STATA CHIAMATA!",$store.paymentStatus);
-        if ($store.paymentStatus == "READY_FOR_PAY") {
-            throw goto(`/build/${$store.orderId}/finalize`);
+        if ($store.paymentStatus === "READY_FOR_PAY") {
+            console.log("SONO STATA CHIAMATA! DENTRO L'IF",$store.paymentStatus);
+            //throw goto(`/build/${$store.orderId}/finalize`);
         }
     }
 </script>
