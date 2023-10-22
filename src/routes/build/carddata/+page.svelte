@@ -11,7 +11,7 @@
   });
 
   const pay = async () => {
-      throw goto(`/build/${$store.orderId}/finalize`);
+    goto(`/build/${$store.orderId}/finalize`);
   };
   const dismiss = () => {};
 </script>

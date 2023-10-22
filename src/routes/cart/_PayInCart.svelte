@@ -33,14 +33,14 @@ import { cart } from '$lib/store/cartStore';
 let pblurl;
 let openDialog=false;
 function build() {
-    throw goto(`build/init?amount=${$cart.total}`)
+    goto(`build/init?amount=${$cart.total}`)
 }
 
 async function pay() {
   let url = await fetch(`/api/pay?amount=${$cart.total}`)
   .then((data) => data.json())
   .then((json) => json.hostedPage);
-  throw goto(url)
+  goto(url)
 }
 async function pbl() {
   pblurl = await fetch(`/api/pbl?amount=${$cart.total}`)

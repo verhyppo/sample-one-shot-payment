@@ -25,7 +25,7 @@
       });
     console.log(json);
     if (json.state == "REDIRECTED_TO_EXTERNAL_DOMAIN") {
-      throw goto(json.url);
+      goto(json.url);
     }
   };
 </script>
