@@ -3,8 +3,8 @@
   import Button from "@smui/button";
   import { goto } from "$app/navigation";
 
-  const pay = () => {
-    goto(`/build/${$store.orderId}/finalize`);
+  const pay = async () => {
+    await goto(`/build/${$store.orderId}/finalize`);
   };
   const dismiss = () => {};
 </script>
