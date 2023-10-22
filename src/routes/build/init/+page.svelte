@@ -23,6 +23,8 @@
     }
 
     $: $store, redirectOnStoreChange;
+    $: ({paymentStatus} = $store);
+    $: paymentStatus, console.log("son stato chiamato");
 </script>
 
 <div class="payment-form" id="payment-methods">
