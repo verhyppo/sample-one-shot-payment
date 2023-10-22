@@ -5,3 +5,4 @@
    */
   onMount(() => window.addEventListener("message", postMessageHelper));
 </script>
+<slot />
