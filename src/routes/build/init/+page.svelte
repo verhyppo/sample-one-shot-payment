@@ -2,7 +2,7 @@
   import { goto } from "$app/navigation";
   import LayoutGrid, { Cell } from "@smui/layout-grid";
   import { onMount } from "svelte";
-  import { store } from "$lib/store/cardDataStore";
+  import { store } from "$lib/store/buildFlowStore";
 
   /** @type {import('./$types').PageData} */
   export let data;

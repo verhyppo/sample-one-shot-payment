@@ -1,4 +1,4 @@
-import { store } from "$lib/store/cardDataStore";
+import { store } from "$lib/store/buildFlowStore";
 import { iframePostMessageUrl } from "$lib/client.config.js";
 import { goto } from "$app/navigation";
 import notifyErrors from "$lib/store/errorStore";

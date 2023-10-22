@@ -1,5 +1,5 @@
 <script>
-  import { store } from "$lib/store/cardDataStore";
+  import { store } from "$lib/store/buildFlowStore";
   import Button from "@smui/button";
 
   /**
