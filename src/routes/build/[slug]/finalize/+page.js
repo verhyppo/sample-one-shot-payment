@@ -8,7 +8,7 @@ export async function load({params, url, fetch}) {
     const json = await fetch(`/api/order/${orderId}`)
         .then((data) => {
             console.log(data.status);
-            data.json()
+            return data.json()
         })
         .catch((e) => {
             console.log(e);
