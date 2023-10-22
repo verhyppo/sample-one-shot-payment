@@ -17,17 +17,9 @@
    * In this case we jump to the last one
    **/
 
-  onMount(() =>
-  unsubscribe = store.subscribe((value) => {
-      if (value.paymentStatus == "READY_FOR_PAY") {
-        throw goto(`/build/${$store.orderId}/finalize`);
-      }
-    }),
-  );
-  /* Remove the binding when this page gets destroyed.
-   * we want tor redirect automatically just here :)
-   */
-  onDestroy(unsubscribe);
+  if ($store.paymentStatus == "READY_FOR_PAY") {
+    throw goto(`/build/${$store.orderId}/finalize`);
+  }
 </script>
 
 <div class="payment-form" id="payment-methods">
