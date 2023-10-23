@@ -3,8 +3,8 @@
 $background: #fff;
 
 @use '@material/theme/index' as theme with (
-  $primary: color-palette.$purple-500,
-  $secondary: color-palette.$teal-600,
+  $primary: #0050AA,
+  $secondary: #FFEF50,
   $surface: #fff,
   $background: $background,
   $error: #b00020

@@ -1,5 +1,4 @@
 <script>
-  import { config } from "../../staticConf";
 
   /** @type {import('./$types').PageData} */
   export let data;

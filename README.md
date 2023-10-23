@@ -2,6 +2,9 @@
 
 [👀 Look at the demo](https://sample-one-shot-payment.vercel.app/)
 
+## Important notes
+This is not a production ready e-shop, this is a showcase to describe the technical integration among an external system and XPAY API.
+
 ## Developing
 
 Install dependencies with `npm install` (or `pnpm install` or `yarn`), then start a development server (plase read configuration section first):
@@ -21,8 +24,18 @@ You can preview the production build with
 ```
 npm run preview
 ```
-The application is ready to be deployed as a Vercel app. 
+ 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+> The application is ready to be deployed as a Vercel app.
+
+### Updating theme and regenerate css
+
+When modifying the theme folder, you need to regenerate the css style with
+
+```bash
+npm run prepare
+```
+After that, you're ready to go.
 
 ## Configuring
 ### Server
