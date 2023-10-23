@@ -1,6 +1,6 @@
 
 
-export let container = {kitchen: null};
+export let container = {kitchen: []};
 
 export default function(message) {
     container.kitchen.push({
