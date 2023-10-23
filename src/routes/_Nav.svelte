@@ -1,7 +1,5 @@
 <script>
   import { clientID, challenge, redirect_uri } from "$lib/client.config";
-  import { onMount } from "svelte";
-  import Badge from "@smui-extra/badge";
   import { Icon } from "@smui/common";
   import TopAppBar, {
     Row,
@@ -20,7 +18,9 @@
 
   const toggleMode = () => (darkTheme = !darkTheme);
 
-  export let generateMicrosoftLoginUrl = `https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=${clientID}&response_type=code&redirect_uri=${redirect_uri}&response_mode=query&scope=openid%20user.read&state=12345&code_challenge=${challenge}&code_challenge_method=S256`;
+  const generateMicrosoftLoginUrl = () => {
+    return `https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=${clientID}&response_type=code&redirect_uri=${redirect_uri}&response_mode=query&scope=openid%20user.read&state=12345&code_challenge=${challenge}&code_challenge_method=S256`;
+  }
 </script>
 
 <svelte:head>
@@ -40,7 +40,7 @@
   <Row>
     <Section>
       <IconButton href="/" class="material-icons">home</IconButton>
-      <Title>Piccol Marketplace</Title>
+      <Title>E-Piccol</Title>
     </Section>
     <Section align="end" toolbar>
       <IconButton href="/cart" style="position: relative;">
