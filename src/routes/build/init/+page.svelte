@@ -14,16 +14,6 @@
      * that allows us to finalize the payment.
      * In this case we jump to the last one
      **/
-    const redirectOnStoreChange = () => {
-        console.log("SONO STATA CHIAMATA!", $store.paymentStatus);
-        if ($store.paymentStatus === "READY_FOR_PAY") {
-            console.log("SONO STATA CHIAMATA! DENTRO L'IF", $store.paymentStatus);
-            goto(`/build/${$store.orderId}/finalize`);
-        }
-    }
-
-    $: ({paymentStatus} = $store);
-    $: paymentStatus, redirectOnStoreChange();
 </script>
 
 <div class="payment-form" id="payment-methods">

@@ -12,7 +12,7 @@ const manageStateChange = async (event) => {
       break;
     case "READY_FOR_PAYMENT":
       store.setReadyForPayment();
-      //location.href = "finalize_hpp.html";
+      goto(`/build/${store.orderId}/finalize`);
       break;
     default:
       console.log(`${state} does not match with any handle. Bail.`);
