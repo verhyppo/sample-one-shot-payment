@@ -1,4 +1,4 @@
-export const iframePostMessageUrl = "https://stg-ta.nexigroup.com";
+export const iframePostMessageUrl = "https://ngwecomm-dev.nexi.it;
 export const clientID = "719d34c4-8b45-40c2-b436-bbcb176580a4";
 export const challenge = "fTp52Jad_e2xMXLLlL0UvIGkG_9HBT996msFdJCOinM";
 export const verifier =
