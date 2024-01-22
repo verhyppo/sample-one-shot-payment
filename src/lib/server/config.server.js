@@ -1,1 +1,3 @@
-export const apikey = "5d952446-9004-4023-9eae-a527a152846b";
+import { env } from '$env/dynamic/private';
+
+export const apikey = env.NEXI_API_KEY
