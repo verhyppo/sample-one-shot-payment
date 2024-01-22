@@ -6,6 +6,10 @@
   import { goto } from "$app/navigation";
   import Card, { Content } from "@smui/card";
 
+
+  export let data;
+  store.setSessionId(data.sessionId);
+
   onDestroy(() => {
     store.clear();
   });
@@ -37,7 +41,7 @@
   <div class="payment-form">
     <h1 class="payment-title">insert card data</h1>
     <div class="payment-content">
-      {#each $store.fields as { id, type, src }, i}
+      {#each data.fields as { id, type, src }, i}
         <div class="payment-field" {id}>
           <iframe {src} title={type}></iframe>
         </div>
