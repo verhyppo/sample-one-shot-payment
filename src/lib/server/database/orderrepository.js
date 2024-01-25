@@ -2,7 +2,7 @@ import { supabase } from "$lib/supabaseClient";
 
 export const saveOrder = async (correlationId, order) => {
   const { data, error } = await supabase.from("orders").insert({
-    order_id: order.order.orderId,
+    order_id: order.operation.orderId,
     trace_id: correlationId,
     order: order,
   });
