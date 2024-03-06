@@ -37,7 +37,7 @@ export const getPayPageData = async (origin, amount) => {
     return saveOrder(uuid, request)
         .then(() =>
             fetch(
-                "https://stg-ta.nexigroup.com/api/phoenix-0.0/psp/api/v1/orders/build",
+                "https://xpaysandbox.nexigroup.com/api/phoenix-0.0/psp/api/v1/orders/build",
                 {
                     headers: {
                         "x-api-key": apikey,
@@ -69,7 +69,7 @@ export const getPayPageData = async (origin, amount) => {
 export const pay = (body) => {
     const uuid = crypto.randomUUID();
     return fetch(
-        "https://stg-ta.nexigroup.com/api/phoenix-0.0/psp/api/v1/build/finalize_payment",
+        "https://xpaysandbox.nexigroup.com/api/phoenix-0.0/psp/api/v1/build/finalize_payment",
         {
             method: "POST",
             headers: {
