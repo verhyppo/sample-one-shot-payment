@@ -32,7 +32,7 @@ export const createPaymentLink = async function (body) {
   return saveOrder(uuid, body)
     .then(() =>
       fetch(
-        "https://stg-ta.nexigroup.com/api/phoenix-0.0/psp/api/v1/orders/hpp",
+        "https://ngwecomm-dev.nexi.it/api/phoenix-0.0/psp/api/v1/orders/hpp",
         {
           headers: {
             "x-api-key": apikey,

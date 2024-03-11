@@ -37,7 +37,7 @@ const body = (origin, amount) => {
 export const createPaymentLink = async function (body) {
   const uuid = crypto.randomUUID();
   return saveOrder(uuid, body).then(() => fetch(
-    "https://stg-ta.nexigroup.com/api/phoenix-0.0/psp/api/v1/orders/paybylink",
+    "https://ngwecomm-dev.nexi.it/api/phoenix-0.0/psp/api/v1/orders/paybylink",
     {
       headers: {
         "x-api-key": apikey,

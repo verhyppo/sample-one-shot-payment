@@ -4,7 +4,7 @@ import crypto from "crypto";
 const getOrder = async (orderId) => {
   const uuid = crypto.randomUUID();
   return fetch(
-        `https://stg-ta.nexigroup.com/api/phoenix-0.0/psp/api/v1/orders/${orderId}`,
+        `https://ngwecomm-dev.nexi.it/api/phoenix-0.0/psp/api/v1/orders/${orderId}`,
         {
           headers: {
             "x-api-key": apikey,
